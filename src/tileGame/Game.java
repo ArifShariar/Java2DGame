@@ -1,7 +1,10 @@
 package tileGame;
 
+import graphics.ImageLoader;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable{
     private Display display;
@@ -13,6 +16,7 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
 
+
     private boolean running = false;
     public Game(String title, int width, int height){
         this.width = width;
@@ -22,6 +26,7 @@ public class Game implements Runnable{
 
     private void init(){
         display = new Display(title, width, height);
+
     }
 
     private void update(){
@@ -35,7 +40,8 @@ public class Game implements Runnable{
         }
         g = bs.getDrawGraphics();
 
-        g.fillRect(0,0,width,height);
+        g.clearRect(0,0,width, height);
+
 
         bs.show();
         g.dispose();
