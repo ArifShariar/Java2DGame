@@ -1,11 +1,17 @@
 package tileGame;
 
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+
 public class Game implements Runnable{
     private Display display;
     public int width, height;
     public String title;
 
     private Thread thread;
+
+    private BufferStrategy bs;
+    private Graphics g;
 
     private boolean running = false;
     public Game(String title, int width, int height){
@@ -22,7 +28,17 @@ public class Game implements Runnable{
 
     }
     private void render(){
+        bs = display.getCanvas().getBufferStrategy();
+        if (bs==null){
+            display.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        g = bs.getDrawGraphics();
 
+        g.fillRect(0,0,width,height);
+
+        bs.show();
+        g.dispose();
     }
 
     @Override
