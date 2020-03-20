@@ -3,6 +3,9 @@ package tileGame;
 import graphics.Assets;
 import graphics.ImageLoader;
 import graphics.SpriteSheet;
+import states.GameState;
+import states.MenuState;
+import states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -19,6 +22,10 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
 
+    // States
+    private State gameState;
+    private State menuState;
+
 
     private boolean running = false;
     public Game(String title, int width, int height){
@@ -30,10 +37,17 @@ public class Game implements Runnable{
     private void init(){
         display = new Display(title, width, height);
         Assets.init();
+
+        gameState = new GameState();
+        menuState = new MenuState();
+        //State.setState(gameState);
+        State.setState(menuState);
     }
-    int x = 0;
+
     private void update(){
-        x = x+ 1;
+        if (State.getState()!=null){
+            State.getState().update();
+        }
     }
     private void render(){
         bs = display.getCanvas().getBufferStrategy();
@@ -44,10 +58,9 @@ public class Game implements Runnable{
         g = bs.getDrawGraphics();
 
         g.clearRect(0,0,width, height);
-
-        g.drawImage(Assets.dirt,x,25,null);
-
-
+        if (State.getState()!=null){
+            State.getState().render(g);
+        }
 
         bs.show();
         g.dispose();
