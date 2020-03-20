@@ -31,9 +31,9 @@ public class Game implements Runnable{
         display = new Display(title, width, height);
         Assets.init();
     }
-
+    int x = 0;
     private void update(){
-
+        x = x+ 1;
     }
     private void render(){
         bs = display.getCanvas().getBufferStrategy();
@@ -45,7 +45,7 @@ public class Game implements Runnable{
 
         g.clearRect(0,0,width, height);
 
-        g.drawImage(Assets.dirt,25,25,null);
+        g.drawImage(Assets.dirt,x,25,null);
 
 
 
@@ -56,9 +56,33 @@ public class Game implements Runnable{
     @Override
     public void run() {
         init();
+        int fps  = 60;
+        double timePerUpdate = 1000000000/fps;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        long timer = 0;
+        int tick = 0;
+
         while (running){
-            update();
-            render();
+            now = System.nanoTime();
+            delta = delta+(now-lastTime)/timePerUpdate;
+            timer += now-lastTime;
+            lastTime = now;
+
+            if (delta>=1) {
+                update();
+                render();
+                tick++;
+                delta--;
+            }
+            /* fps counter
+            if (timer>=1000000000){
+                System.out.println("tick::: "+tick);
+                tick = 0;
+                timer = 0;
+            }
+             */
         }
         stop();
     }
