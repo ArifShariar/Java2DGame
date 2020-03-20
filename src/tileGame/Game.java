@@ -1,6 +1,7 @@
 package tileGame;
 
 import graphics.ImageLoader;
+import graphics.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -16,6 +17,8 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
 
+    private BufferedImage test1;
+    private SpriteSheet sheet;
 
     private boolean running = false;
     public Game(String title, int width, int height){
@@ -26,7 +29,8 @@ public class Game implements Runnable{
 
     private void init(){
         display = new Display(title, width, height);
-
+        test1 = ImageLoader.loadImage("/textures/Sheet.png");
+        sheet = new SpriteSheet(test1);
     }
 
     private void update(){
@@ -42,6 +46,8 @@ public class Game implements Runnable{
 
         g.clearRect(0,0,width, height);
 
+        g.drawImage(sheet.crop(0,0,140,140),5,5,null);
+        g.drawImage(sheet.crop(140,0,140,140),300,300,null);
 
         bs.show();
         g.dispose();
