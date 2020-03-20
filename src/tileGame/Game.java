@@ -1,24 +1,24 @@
 package tileGame;
 
+import graphics.Assets;
 import graphics.ImageLoader;
 import graphics.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Game implements Runnable{
     private Display display;
     public int width, height;
     public String title;
-
+    Random rand = new Random();
     private Thread thread;
 
     private BufferStrategy bs;
     private Graphics g;
 
-    private BufferedImage test1;
-    private SpriteSheet sheet;
 
     private boolean running = false;
     public Game(String title, int width, int height){
@@ -29,8 +29,7 @@ public class Game implements Runnable{
 
     private void init(){
         display = new Display(title, width, height);
-        test1 = ImageLoader.loadImage("/textures/Sheet.png");
-        sheet = new SpriteSheet(test1);
+        Assets.init();
     }
 
     private void update(){
@@ -46,8 +45,9 @@ public class Game implements Runnable{
 
         g.clearRect(0,0,width, height);
 
-        g.drawImage(sheet.crop(0,0,140,140),5,5,null);
-        g.drawImage(sheet.crop(140,0,140,140),300,300,null);
+        g.drawImage(Assets.dirt,25,25,null);
+
+
 
         bs.show();
         g.dispose();
