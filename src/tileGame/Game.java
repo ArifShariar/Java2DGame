@@ -40,8 +40,8 @@ public class Game implements Runnable{
 
         gameState = new GameState();
         menuState = new MenuState();
-        //State.setState(gameState);
-        State.setState(menuState);
+        State.setState(gameState);
+        //State.setState(menuState);
     }
 
     private void update(){
