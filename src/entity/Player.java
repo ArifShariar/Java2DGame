@@ -1,16 +1,31 @@
 package entity;
 
 import graphics.Assets;
+import tileGame.Game;
 
 import java.awt.*;
 
 public class Player extends Creature{
-    public Player(float x, float y) {
+    private Game game;
+    public Player(Game game, float x, float y) {
         super(x, y);
+        this.game = game;
     }
 
     @Override
     public void update() {
+        if (game.getKeyManager().up){
+            y -= 3;
+        }
+        if (game.getKeyManager().down){
+            y += 3;
+        }
+        if (game.getKeyManager().left){
+            x -= 3;
+        }
+        if (game.getKeyManager().right){
+            x += 3;
+        }
 
     }
 

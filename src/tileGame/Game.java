@@ -3,6 +3,7 @@ package tileGame;
 import graphics.Assets;
 import graphics.ImageLoader;
 import graphics.SpriteSheet;
+import input.KeyManager;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -26,25 +27,30 @@ public class Game implements Runnable{
     private State gameState;
     private State menuState;
 
+    // INPUT
+    private KeyManager keyManager;
 
     private boolean running = false;
     public Game(String title, int width, int height){
         this.width = width;
         this.height = height;
         this.title = title;
+        keyManager = new KeyManager();
     }
 
     private void init(){
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        gameState = new GameState();
-        menuState = new MenuState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
         State.setState(gameState);
         //State.setState(menuState);
     }
 
     private void update(){
+        keyManager.update();
         if (State.getState()!=null){
             State.getState().update();
         }
@@ -98,6 +104,9 @@ public class Game implements Runnable{
              */
         }
         stop();
+    }
+    public KeyManager getKeyManager(){
+        return keyManager;
     }
     public synchronized void start(){
         if(running)
