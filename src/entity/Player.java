@@ -6,16 +6,16 @@ import tileGame.Game;
 import java.awt.*;
 
 public class Player extends Creature{
-    private Game game;
+
     public Player(Game game, float x, float y) {
-        super(x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
-        this.game = game;
+        super(game, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
     }
 
     @Override
     public void update() {
         getInput();
         move();
+        game.getGameCamera().centerOnEntity(this);
     }
     private void getInput(){
         xMove = 0;
@@ -37,6 +37,8 @@ public class Player extends Creature{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player,(int)x,(int)y,width,height,null);
+
+        g.drawImage(Assets.player,(int)(x-game.getGameCamera().getxOffset()),(int)(y-game.getGameCamera().getyOffset()),
+                width,height,null);
     }
 }

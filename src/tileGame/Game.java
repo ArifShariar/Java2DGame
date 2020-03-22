@@ -1,6 +1,7 @@
 package tileGame;
 
 import graphics.Assets;
+import graphics.GameCamera;
 import graphics.ImageLoader;
 import graphics.SpriteSheet;
 import input.KeyManager;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 public class Game implements Runnable{
     private Display display;
-    public int width, height;
+    private int width, height;
     public String title;
     Random rand = new Random();
     private Thread thread;
@@ -30,6 +31,11 @@ public class Game implements Runnable{
     // INPUT
     private KeyManager keyManager;
 
+    // CAMERA
+
+    private GameCamera gameCamera;
+
+
     private boolean running = false;
     public Game(String title, int width, int height){
         this.width = width;
@@ -42,6 +48,8 @@ public class Game implements Runnable{
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+
+        gameCamera = new GameCamera(this,0,0);
 
         gameState = new GameState(this);
         menuState = new MenuState(this);
@@ -115,6 +123,19 @@ public class Game implements Runnable{
         thread = new Thread(this);
         thread.start();
     }
+
+    public GameCamera getGameCamera() {
+        return gameCamera;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public synchronized void stop(){
         if(!running)
             return;
