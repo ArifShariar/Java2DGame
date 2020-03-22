@@ -1,6 +1,7 @@
 package states;
 
 import tileGame.Game;
+import tileGame.Handler;
 
 import java.awt.*;
 
@@ -15,9 +16,11 @@ public abstract class State {
     public static State getState(){
         return currentState;
     }
-    protected Game game;
-    public State(Game game){
-        this.game = game;
+
+    protected Handler handler;
+
+    public State(Handler handler){
+        this.handler = handler;
     }
 
     // ABSTRACT METHODS

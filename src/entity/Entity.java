@@ -1,15 +1,16 @@
 package entity;
 
 import tileGame.Game;
+import tileGame.Handler;
 
 import java.awt.*;
 
 public abstract class Entity {
     protected float x, y;
     protected int width, height;
-    protected Game game;
-    public  Entity(Game game, float x, float y, int width, int height){
-        this.game = game;
+    protected Handler handler;
+    public  Entity(Handler handler, float x, float y, int width, int height){
+        this.handler = handler;
         this.x = x;
         this.y = y;
         this.width = width;

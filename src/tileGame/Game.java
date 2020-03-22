@@ -18,8 +18,10 @@ public class Game implements Runnable{
     private Display display;
     private int width, height;
     public String title;
+
     Random rand = new Random();
     private Thread thread;
+    private boolean running = false;
 
     private BufferStrategy bs;
     private Graphics g;
@@ -32,11 +34,11 @@ public class Game implements Runnable{
     private KeyManager keyManager;
 
     // CAMERA
-
     private GameCamera gameCamera;
 
+    //HANDLER
+    private Handler handler;
 
-    private boolean running = false;
     public Game(String title, int width, int height){
         this.width = width;
         this.height = height;
@@ -50,9 +52,11 @@ public class Game implements Runnable{
         Assets.init();
 
         gameCamera = new GameCamera(this,0,0);
+        handler = new Handler(this);
 
-        gameState = new GameState(this);
-        menuState = new MenuState(this);
+
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
         State.setState(gameState);
         //State.setState(menuState);
     }
