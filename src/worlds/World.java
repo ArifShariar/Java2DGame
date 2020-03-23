@@ -20,6 +20,7 @@ public class World {
 
     }
     public void render(Graphics g){
+        // render whats in the view
         int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset()/Tile.TILE_WIDTH);
         int xEnd = (int) Math.min(width,(handler.getGameCamera().getxOffset()+ handler.getWidth())/Tile.TILE_WIDTH + 1);
         int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset()/Tile.TILE_HEIGHT);
@@ -56,6 +57,12 @@ public class World {
             }
         }
 
+    }
 
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
     }
 }
