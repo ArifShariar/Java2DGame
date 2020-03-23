@@ -2,6 +2,7 @@ package entity;
 
 import tileGame.Game;
 import tileGame.Handler;
+import tiles.Tile;
 
 public abstract class Creature extends Entity{
     public static final int DEFAULT_HEALTH = 10;
@@ -25,8 +26,52 @@ public abstract class Creature extends Entity{
     }
 
     public void move(){
-        x += xMove;
-        y += yMove;
+        moveX();
+        moveY();
+    }
+
+    public void moveX(){
+        if(xMove>0){
+            // move right
+            int tx = (int)(x+xMove+bounds.x+bounds.width)/ Tile.TILE_WIDTH;
+            if(!collisionWithTile(tx,(int)(y+bounds.y)/Tile.TILE_HEIGHT)
+            && !collisionWithTile(tx, (int)(y+bounds.y+bounds.height)/Tile.TILE_HEIGHT)){
+                x+=xMove;
+            }
+
+        }
+        else if(xMove<0){
+            // move left
+            int tx = (int)(x+ xMove+ bounds.x)/ Tile.TILE_WIDTH;
+            if(!collisionWithTile(tx,(int)(y+bounds.y)/Tile.TILE_HEIGHT)
+                    && !collisionWithTile(tx, (int)(y+bounds.y+bounds.height)/Tile.TILE_HEIGHT)){
+                x+=xMove;
+            }
+        }
+    }
+    public void moveY(){
+        if (yMove<0){
+            //up
+            int tempY = (int) (y + yMove + bounds.y)/Tile.TILE_HEIGHT;
+            if(!collisionWithTile((int)(x+bounds.x)/Tile.TILE_WIDTH, tempY)
+            && !collisionWithTile((int)(x+bounds.x+bounds.width)/Tile.TILE_WIDTH, tempY)){
+                y += yMove;
+            }
+
+        }
+        else if(yMove>0){
+            // down
+            int tempY = (int) (y + yMove + bounds.y + bounds.height)/Tile.TILE_HEIGHT;
+            if(!collisionWithTile((int)(x+bounds.x)/Tile.TILE_WIDTH, tempY)
+                    && !collisionWithTile((int)(x+bounds.x+bounds.width)/Tile.TILE_WIDTH, tempY)){
+                y += yMove;
+            }
+        }
+
+
+    }
+    protected boolean collisionWithTile(int x, int y){
+        return handler.getWorld().getTile(x,y).isSolid();
     }
     // getter and setters
 
