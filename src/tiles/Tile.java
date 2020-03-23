@@ -13,6 +13,8 @@ public class Tile {
     public static Tile stoneTile = new StoneTile(2);
     public static Tile treeTile = new TreeTile(3);
     public static Tile waterTile = new WaterTile(4);
+    public static Tile lavaTile = new LavaTile(5);
+    public static Tile brickTile = new BrickTile(6);
 
 
     // main class
@@ -34,6 +36,7 @@ public class Tile {
     public void render(Graphics g, int x,int y){
         g.drawImage(texture,x,y,TILE_WIDTH,TILE_HEIGHT, null);
     }
+
     public boolean isSolid(){
         return false;// if false, then can walk on it
     }
