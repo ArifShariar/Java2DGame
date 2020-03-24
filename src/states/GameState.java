@@ -17,7 +17,7 @@ public class GameState extends State{
         super(handler);
         world = new World(handler,"res/world/world1.txt");
         handler.setWorld(world);
-        player = new Player(handler,100,100);
+        player = new Player(handler,584,584);
     }
 
     @Override
@@ -28,9 +28,6 @@ public class GameState extends State{
 
     @Override
     public void render(Graphics g) {
-
-       // Tile.tileArray[0].render(g,10,10);
-        //Tile.tileArray[2].render(g,100,10);
         world.render(g);
         player.render(g);
     }

@@ -3,16 +3,15 @@ package graphics;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-    private static final int width = 32, height = 32;
-    private static final int playerWidth = 584, playerHeight = 584;
-    public static BufferedImage dirt, grass, water, tree,stone,lava, brick;
+    private static final int width = 584, height = 584;
+    public static BufferedImage dirt, grass, water, tree,stone,lava, brick,player;
     public static BufferedImage[] player_up;
     public static BufferedImage[] player_down;
     public static BufferedImage[] player_right;
     public static BufferedImage[] player_left;
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/Sheet.png"));
-        SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("/textures/Animation1.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/test.png"));
+        SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("/textures/Animationtest.png"));
 
         player_right = new BufferedImage[6];
         player_right[0] = sheet2.crop(0,0,width, height);
@@ -55,6 +54,8 @@ public class Assets {
         stone =sheet.crop(width, height,width,height);
         lava = sheet.crop(2*width,height,width,height);
         brick = sheet.crop(3*width, height, width, height);
+
+
 
     }
 }

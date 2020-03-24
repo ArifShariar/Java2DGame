@@ -18,8 +18,10 @@ public class Tile {
 
 
     // main class
-    public static final int TILE_WIDTH = 64;
-    public static final int TILE_HEIGHT = 64;
+    //public static final int TILE_WIDTH = 64;
+    public static final int TILE_WIDTH = 584;
+    public static final int TILE_HEIGHT = 584;
+    //public static final int TILE_HEIGHT = 64;
     protected BufferedImage texture;
     protected final int id;
 

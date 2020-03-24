@@ -17,10 +17,10 @@ public class Player extends Creature{
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
-        bounds.x = 14;
-        bounds.y = 32;
-        bounds.width = 30;
-        bounds.height = 12; // change according to player size
+        bounds.x = 130;
+        bounds.y = 150;
+        bounds.width = 40;
+        bounds.height = 40; // change according to player size
 
         animationDown = new Animation(166,Assets.player_down);
         animationUp = new Animation(166,Assets.player_up);
@@ -63,10 +63,10 @@ public class Player extends Creature{
         g.drawImage(getCurrentAnimationFrame(),(int)(x-handler.getGameCamera().getxOffset()),
                 (int)(y-handler.getGameCamera().getyOffset()),
                 width,height,null);
-       // g.setColor(Color.RED);
-        //g.fillRect((int)(x + bounds.x-handler.getGameCamera().getxOffset()),
-          //      (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
-            //    bounds.width, bounds.height);
+      //  g.setColor(Color.RED);
+       // g.fillRect((int)(x + bounds.x-handler.getGameCamera().getxOffset()),
+         //       (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
+           //     bounds.width, bounds.height);
     }
 
     private BufferedImage getCurrentAnimationFrame(){
