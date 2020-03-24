@@ -1,6 +1,5 @@
 package entity;
 
-import tileGame.Game;
 import tileGame.Handler;
 
 import java.awt.*;
@@ -20,6 +19,21 @@ public abstract class Entity {
     }
     public abstract void update();
     public abstract void render(Graphics g);
+
+    public boolean checkEntityCollisions(float xOffset, float yOffset){
+        for (Entity e: handler.getWorld().getEntityManager().getEntities()) {
+            if (e.equals(this))
+                continue;
+            if(e.getCollisionBound(0f, 0f).intersects(getCollisionBound(xOffset, yOffset))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Rectangle getCollisionBound(float xOffset, float yOffset){
+        return new Rectangle((int)(x+bounds.x+xOffset),(int)(y+bounds.y+yOffset),bounds.width, bounds.height);
+    }
 
     public float getX() {
         return x;

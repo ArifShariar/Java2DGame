@@ -2,6 +2,7 @@ package worlds;
 
 import entity.EntityManager;
 import entity.Player;
+import entity.staticEntities.Tree;
 import tileGame.Handler;
 import tiles.Tile;
 import utilities.Utils;
@@ -20,6 +21,7 @@ public class World {
         this.handler = handler;
         entityManager = new EntityManager(handler, new Player(handler,584,584));
 
+        entityManager.addEntity(new Tree(handler, 1024,1000));
         loadWorld(path);
 
         entityManager.getPlayer().setX(spawnX);
@@ -78,5 +80,13 @@ public class World {
     }
     public int getHeight(){
         return height;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
