@@ -4,6 +4,7 @@ import graphics.Assets;
 import tileGame.Game;
 import tileGame.Handler;
 
+import javax.swing.text.ChangedCharSetException;
 import java.awt.*;
 
 public class MenuState extends State {
@@ -12,11 +13,15 @@ public class MenuState extends State {
     }
     @Override
     public void update() {
+        if (handler.getMouseManager().isLeftPressed()){
+            State.setState(handler.getGame().gameState);
+        }
+
 
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.tree,100,100,null);
+
     }
 }

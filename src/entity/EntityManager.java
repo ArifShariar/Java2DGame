@@ -4,12 +4,24 @@ import tileGame.Handler;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EntityManager {
     private Handler handler;
     private Player player;
 
     private ArrayList<Entity> entities;
+
+    private Comparator<Entity>renderSort = new Comparator<Entity>() {
+        @Override
+        public int compare(Entity e1, Entity e2) {
+            if(e1.getY()+e1.getHeight()< e2.getY() + e2.getHeight()){
+                return  -1;
+            }else {
+                return 1;
+            }
+        }
+    };
     public EntityManager(Handler handler, Player player){
         this.handler = handler;
         this.player = player;
@@ -22,6 +34,7 @@ public class EntityManager {
             Entity e = entities.get(i);
             e.update();
         }
+        entities.sort(renderSort);
 
     }
     public void render(Graphics g){

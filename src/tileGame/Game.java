@@ -5,6 +5,7 @@ import graphics.GameCamera;
 import graphics.ImageLoader;
 import graphics.SpriteSheet;
 import input.KeyManager;
+import input.MouseManager;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -27,11 +28,12 @@ public class Game implements Runnable{
     private Graphics g;
 
     // States
-    private State gameState;
-    private State menuState;
+    public State gameState;
+    public State menuState;
 
     // INPUT
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     // CAMERA
     private GameCamera gameCamera;
@@ -44,12 +46,21 @@ public class Game implements Runnable{
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
     private void init(){
         display = new Display(title, width, height);
+
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
+
         Assets.init();
+
         handler = new Handler(this);
         gameCamera = new GameCamera(handler,0,0);
 
@@ -57,8 +68,8 @@ public class Game implements Runnable{
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(gameState);
-        //State.setState(menuState);
+        //State.setState(gameState);
+        State.setState(menuState);
     }
 
     private void update(){
@@ -119,6 +130,9 @@ public class Game implements Runnable{
     }
     public KeyManager getKeyManager(){
         return keyManager;
+    }
+    public MouseManager getMouseManager(){
+        return mouseManager;
     }
     public synchronized void start(){
         if(running)
