@@ -5,12 +5,15 @@ import java.awt.image.BufferedImage;
 public class Assets {
     private static final int width = 584, height = 584;
     public static BufferedImage dirt, grass, water, tree,stone,lava, brick,player;
+
     public static BufferedImage[] player_up;
     public static BufferedImage[] player_down;
     public static BufferedImage[] player_right;
     public static BufferedImage[] player_left;
+
+    public static BufferedImage[] button_start;
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/test.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/FinalTest.png"));
         SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("/textures/Animationtest.png"));
 
         player_right = new BufferedImage[6];
@@ -54,6 +57,10 @@ public class Assets {
         stone =sheet.crop(width, height,width,height);
         lava = sheet.crop(2*width,height,width,height);
         brick = sheet.crop(3*width, height, width, height);
+
+        button_start = new BufferedImage[2];
+        button_start[0] = sheet.crop(0, 2*height, width,height);
+        button_start[1] = sheet.crop(width, 2*height, width, height);
 
 
 
