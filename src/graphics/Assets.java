@@ -11,10 +11,13 @@ public class Assets {
     public static BufferedImage[] player_right;
     public static BufferedImage[] player_left;
 
+    public static BufferedImage[] player_idle;
+
     public static BufferedImage[] button_start;
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/FinalTest.png"));
         SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("/textures/Animationtest.png"));
+        SpriteSheet idle = new SpriteSheet(ImageLoader.loadImage("/textures/IdleAnimation.png"));
 
         player_right = new BufferedImage[6];
         player_right[0] = sheet2.crop(0,0,width, height);
@@ -47,6 +50,12 @@ public class Assets {
         player_down[3] =sheet2.crop(width*3,3*height,width,height);
         player_down[4] =sheet2.crop(width*4,3*height,width,height);
         player_down[5] =sheet2.crop(width*5,3*height,width,height);
+
+        player_idle = new BufferedImage[4];
+        player_idle[0]=idle.crop(width, height, width, height);
+        player_idle[1]=idle.crop(width*2, height, width, height);
+        player_idle[2]=idle.crop(width*3, height, width, height);
+        player_idle[3]=idle.crop(width*4, height, width, height);
 
 
 

@@ -14,6 +14,7 @@ public class Player extends Creature{
     private Animation animationUp;
     private Animation animationLeft;
     private Animation animationRight;
+    private Animation animationIdle;
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -26,6 +27,7 @@ public class Player extends Creature{
         animationUp = new Animation(166,Assets.player_up);
         animationLeft = new Animation(166,Assets.player_left);
         animationRight = new Animation(166,Assets.player_right);
+        animationIdle = new Animation(166, Assets.player_idle);
     }
 
     @Override
@@ -34,6 +36,7 @@ public class Player extends Creature{
         animationUp.update();
         animationRight.update();
         animationLeft.update();
+        animationIdle.update();
 
         getInput();
         move();
@@ -63,10 +66,10 @@ public class Player extends Creature{
         g.drawImage(getCurrentAnimationFrame(),(int)(x-handler.getGameCamera().getxOffset()),
                 (int)(y-handler.getGameCamera().getyOffset()),
                 width,height,null);
-      //  g.setColor(Color.RED);
-       // g.fillRect((int)(x + bounds.x-handler.getGameCamera().getxOffset()),
-         //       (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
-           //     bounds.width, bounds.height);
+      // g.setColor(Color.RED);
+      // g.fillRect((int)(x + bounds.x-handler.getGameCamera().getxOffset()),
+         //      (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
+          //     bounds.width, bounds.height);
     }
 
     private BufferedImage getCurrentAnimationFrame(){
@@ -79,8 +82,11 @@ public class Player extends Creature{
         else if(yMove<0){
             return animationUp.getCurrentFrame();
         }
-        else {
+        else if(yMove>0) {
             return animationDown.getCurrentFrame();
+        }
+        else{
+            return animationIdle.getCurrentFrame();
         }
 
     }
