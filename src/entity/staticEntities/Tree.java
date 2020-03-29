@@ -14,8 +14,6 @@ public class Tree extends StaticEntity{
         bounds.y = (int) (height/1.5f);
         bounds.width = width -460;
         bounds.height = (int) (height - height/1.5f);
-
-
     }
 
     @Override
