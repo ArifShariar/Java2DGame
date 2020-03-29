@@ -10,7 +10,6 @@ public class Tile {
     public static Tile[] tileArray = new Tile[256];
     public static Tile grassTile = new GrassTile(0);
     public static Tile dirtTile = new DirtTile(1);
-    public static Tile stoneTile = new StoneTile(2);
     public static Tile waterTile = new WaterTile(4);
     public static Tile lavaTile = new LavaTile(5);
     public static Tile brickTile = new BrickTile(6);

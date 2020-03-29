@@ -16,6 +16,8 @@ public class Player extends Creature{
     private Animation animationRight;
     private Animation animationIdle;
 
+    // ATTACK TIMER
+    private long lastAttackTimer, attackCoolDown = 800, attackTimer = attackCoolDown;
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         bounds.x = 130;
@@ -37,10 +39,58 @@ public class Player extends Creature{
         animationRight.update();
         animationLeft.update();
         animationIdle.update();
-
+        // MOVEMENT
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this);
+
+        // ATTACK
+        checkAttack();
+    }
+
+    private void checkAttack(){
+        attackTimer +=System.currentTimeMillis() - lastAttackTimer;
+        lastAttackTimer = System.currentTimeMillis();
+        if(attackTimer<attackCoolDown)
+            return;
+        Rectangle collisionBounds = getCollisionBound(0,0);
+        Rectangle attackRectangle = new Rectangle();
+        int arSize = 20;
+        attackRectangle.width = arSize;
+        attackRectangle.height = arSize;
+
+        if (handler.getKeyManager().aUp){
+            attackRectangle.x = collisionBounds.x + collisionBounds.width/2 - arSize/2;
+            attackRectangle.y = collisionBounds.y - arSize;
+        }
+        else if(handler.getKeyManager().aDown){
+            attackRectangle.x = collisionBounds.x + collisionBounds.width/2 - arSize/2;
+            attackRectangle.y = collisionBounds.y + collisionBounds.height;
+
+        }
+        else if(handler.getKeyManager().aLeft){
+            attackRectangle.x = collisionBounds.x - arSize;
+            attackRectangle.y = collisionBounds.y + collisionBounds.height/2 - arSize/2;
+
+        }
+        else if(handler.getKeyManager().aRight){
+            attackRectangle.x = collisionBounds.x + collisionBounds.width;
+            attackRectangle.y = collisionBounds.y + collisionBounds.height/2 - arSize/2;
+        }
+        else{
+            return;
+        }
+        attackTimer = 0;
+        for (Entity e: handler.getWorld().getEntityManager().getEntities()){
+            if(e.equals(this)){
+                continue;
+            }
+            if(e.getCollisionBound(0,0).intersects(attackRectangle)){
+                e.hurt(1);
+                return;
+            }
+        }
+
     }
     private void getInput(){
         xMove = 0;
@@ -70,6 +120,10 @@ public class Player extends Creature{
       // g.fillRect((int)(x + bounds.x-handler.getGameCamera().getxOffset()),
          //      (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
           //     bounds.width, bounds.height);
+   }
+
+    public void die(){
+        System.out.println("YOu dEAD");
     }
 
     private BufferedImage getCurrentAnimationFrame(){

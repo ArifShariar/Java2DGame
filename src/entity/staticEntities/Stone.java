@@ -32,4 +32,9 @@ public class Stone extends StaticEntity{
               (int)(y + bounds.y-handler.getGameCamera().getyOffset()),
             bounds.width, bounds.height);*/
     }
+
+    @Override
+    public void die() {
+
+    }
 }
