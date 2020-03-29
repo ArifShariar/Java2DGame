@@ -15,6 +15,7 @@ public class Player extends Creature{
     private Animation animationLeft;
     private Animation animationRight;
     private Animation animationIdle;
+    private Animation animationAttack1;
 
     // ATTACK TIMER
     private long lastAttackTimer, attackCoolDown = 800, attackTimer = attackCoolDown;
@@ -30,6 +31,7 @@ public class Player extends Creature{
         animationLeft = new Animation(166,Assets.player_left);
         animationRight = new Animation(166,Assets.player_right);
         animationIdle = new Animation(166, Assets.player_idle);
+        animationAttack1 = new Animation(200, Assets.attack1);
     }
 
     @Override
@@ -39,6 +41,9 @@ public class Player extends Creature{
         animationRight.update();
         animationLeft.update();
         animationIdle.update();
+        animationAttack1.update();
+
+
         // MOVEMENT
         getInput();
         move();
@@ -140,6 +145,9 @@ public class Player extends Creature{
             return animationDown.getCurrentFrame();
         }
         else{
+            if (handler.getKeyManager().aUp || handler.getKeyManager().aRight || handler.getKeyManager().aLeft || handler.getKeyManager().aDown){
+                return  animationAttack1.getCurrentFrame();
+            }
             return animationIdle.getCurrentFrame();
         }
 

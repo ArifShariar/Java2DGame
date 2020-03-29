@@ -13,12 +13,15 @@ public class Assets {
 
     public static BufferedImage[] player_idle;
 
+    public static BufferedImage[] attack1;
+
     public static BufferedImage[] button_start;
 
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/FinalTest.png"));
         SpriteSheet sheet2 = new SpriteSheet(ImageLoader.loadImage("/textures/WalkAnimation.png"));
         SpriteSheet idle = new SpriteSheet(ImageLoader.loadImage("/textures/IdleAnimation.png"));
+        SpriteSheet attackSheet1 = new SpriteSheet(ImageLoader.loadImage("/textures/Attack1.png"));
 
         player_right = new BufferedImage[6];
         player_right[0] = sheet2.crop(width,height,width, height);
@@ -59,6 +62,19 @@ public class Assets {
         player_idle[1]=idle.crop(width*2, height, width, height);
         player_idle[2]=idle.crop(width*3, height, width, height);
         player_idle[3]=idle.crop(width*4, height, width, height);
+
+        attack1 = new BufferedImage[11];
+        attack1[0] = attackSheet1.crop(width, height, width, height);
+        attack1[1] = attackSheet1.crop(width*2, height, width, height);
+        attack1[2] = attackSheet1.crop(width*3, height, width, height);
+        attack1[3] = attackSheet1.crop(width*4, height, width, height);
+        attack1[4] = attackSheet1.crop(width*5, height, width, height);
+        attack1[5] = attackSheet1.crop(width*6, height, width, height);
+        attack1[6] = attackSheet1.crop(width*7, height, width, height);
+        attack1[7] = attackSheet1.crop(width*8, height, width, height);
+        attack1[8] = attackSheet1.crop(width*9, height, width, height);
+        attack1[9] = attackSheet1.crop(width*10, height, width, height);
+        attack1[10] = attackSheet1.crop(width*11, height, width, height);
 
 
 
