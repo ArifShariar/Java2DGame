@@ -44,8 +44,6 @@ public class Player extends Creature{
         animationIdle.update();
         animationAttack1Right.update();
         animationAttack1Left.update();
-
-
         // MOVEMENT
         getInput();
         move();

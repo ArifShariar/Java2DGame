@@ -5,7 +5,7 @@ import tileGame.Handler;
 import java.awt.*;
 
 public abstract class Entity {
-    public static final int DEFAULT_HEALTH = 10;
+    public static final int DEFAULT_HEALTH = 3;
     protected float x, y;
     protected int width, height;
     protected int health;

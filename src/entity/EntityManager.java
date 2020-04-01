@@ -2,9 +2,11 @@ package entity;
 
 import tileGame.Handler;
 
+import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class EntityManager {
     private Handler handler;
@@ -30,11 +32,12 @@ public class EntityManager {
 
     }
     public void update(){
-        for (int i = 0; i <entities.size() ; i++) {
-            Entity e = entities.get(i);
+        Iterator<Entity> ent = entities.iterator();
+        while (ent.hasNext()){
+            Entity e = ent.next();
             e.update();
             if (!e.isActive()){
-                entities.remove(e);
+                ent.remove();
             }
         }
         entities.sort(renderSort);
