@@ -16,7 +16,7 @@ public class Item {
 
 
     // CLASS
-    public static final int ITEM_WIDTH=32, ITEM_HEIGHT = 32, PICKED_UP=-1;
+    public static final int ITEM_WIDTH=584, ITEM_HEIGHT = 584, PICKED_UP=-1;
 
     protected Handler handler;
     protected BufferedImage texture;

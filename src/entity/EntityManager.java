@@ -2,7 +2,6 @@ package entity;
 
 import tileGame.Handler;
 
-import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;

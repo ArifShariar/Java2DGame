@@ -2,8 +2,6 @@ package tileGame;
 
 import graphics.Assets;
 import graphics.GameCamera;
-import graphics.ImageLoader;
-import graphics.SpriteSheet;
 import input.KeyManager;
 import input.MouseManager;
 import states.GameState;
@@ -12,7 +10,7 @@ import states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+
 import java.util.Random;
 
 public class Game implements Runnable{
