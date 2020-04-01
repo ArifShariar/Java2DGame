@@ -1,6 +1,7 @@
 package entity.staticEntities;
 
 import graphics.Assets;
+import items.Item;
 import tileGame.Handler;
 import tiles.Tile;
 
@@ -34,6 +35,7 @@ public class Stone extends StaticEntity{
 
     @Override
     public void die() {
+        handler.getWorld().getItemManager().addItem(Item.stoneDebris.createNew((int)x,(int)y));
 
     }
 }
